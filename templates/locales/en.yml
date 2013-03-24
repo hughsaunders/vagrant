@@ -810,6 +810,10 @@ en:
             Attempting graceful shutdown of VM...
         hostname:
           setting: "Setting hostname..."
+        clone:
+          cloning: vm '%{source_vm}'
+          failure: |-
+            The VM clone failed! Try cloning vanually via virtualbox.  
         import:
           importing: Importing base box '%{name}'...
           failure: |-

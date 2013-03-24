@@ -23,6 +23,7 @@ module VagrantPlugins
       autoload :ForcedHalt, File.expand_path("../action/forced_halt", __FILE__)
       autoload :ForwardPorts, File.expand_path("../action/forward_ports", __FILE__)
       autoload :Import, File.expand_path("../action/import", __FILE__)
+      autoload :Clone, File.expand_path("../action/clone", __FILE__)
       autoload :IsPaused, File.expand_path("../action/is_paused", __FILE__)
       autoload :IsRunning, File.expand_path("../action/is_running", __FILE__)
       autoload :IsSaved, File.expand_path("../action/is_saved", __FILE__)
@@ -296,7 +297,11 @@ module VagrantPlugins
             if !env[:result]
               b2.use CheckAccessible
               b2.use HandleBoxUrl
-              b2.use Import
+              if env[:machine].clone_source
+                b2.use Clone
+              else
+                b2.use Import
+              end
               b2.use MatchMACAddress
             end
           end

@@ -29,6 +29,11 @@ module VagrantPlugins
       # @return [Hash]
       attr_reader :network_adapters
 
+      # VM to clone this instance from.
+      #
+      # @return [String]
+      attr_reader :source_vm
+
       def initialize
         @auto_nat_dns_proxy = UNSET_VALUE
         @customizations   = []

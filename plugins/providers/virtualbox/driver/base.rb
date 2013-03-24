@@ -153,6 +153,13 @@ module VagrantPlugins
         def import(ovf)
         end
 
+        # Clone an existing VM
+        #
+        # @param [String] name of existing vm 
+        # @return [String] UUID of the imported VM.
+        def clone(source_vm)
+        end
+
         # Returns a list of forwarded ports for a VM.
         #
         # @param [String] uuid UUID of the VM to read from, or `nil` if this

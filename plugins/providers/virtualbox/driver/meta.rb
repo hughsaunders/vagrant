@@ -82,6 +82,7 @@ module VagrantPlugins
           :forward_ports,
           :halt,
           :import,
+          :clone,
           :read_forwarded_ports,
           :read_bridged_interfaces,
           :read_guest_additions_version,

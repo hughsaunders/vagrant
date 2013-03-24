@@ -156,6 +156,22 @@ module VagrantPlugins
           execute("controlvm", @uuid, "poweroff")
         end
 
+        def clone(source_vm, name)
+          snapshot_name = "#{souce_vm}_clone_snapshot"
+          if execute("snapshot", source_vm, "list", "--machinereadable") 
+            =~ /^"#{Regexp.escape(snapshot_name)}"=/
+            # Delete snapshot with conflicting name
+            execute("snapshot", source_vm, 'delete', snapshot_name) 
+          end
+          execute("snapshot", source_vm, 'take', snapshot_name 
+          if execute("clonevm", source_vm, '--name', name, 
+            '--snapshot', snapshot_name, 
+            '--mode',  'machine', '--options', 'link') !~ /successfully cloned/
+            @logger.error("Cloning #{source_vm} failed. ")
+            return nil
+          end
+        end
+
         def import(ovf)
           ovf = Vagrant::Util::Platform.cygwin_windows_path(ovf)
 
