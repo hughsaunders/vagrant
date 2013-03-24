@@ -158,12 +158,12 @@ module VagrantPlugins
 
         def clone(source_vm, name)
           snapshot_name = "#{souce_vm}_clone_snapshot"
-          if execute("snapshot", source_vm, "list", "--machinereadable") 
+          if execute("snapshot", source_vm, "list", "--machinereadable")  \
             =~ /^"#{Regexp.escape(snapshot_name)}"=/
             # Delete snapshot with conflicting name
             execute("snapshot", source_vm, 'delete', snapshot_name) 
           end
-          execute("snapshot", source_vm, 'take', snapshot_name 
+          execute("snapshot", source_vm, 'take', snapshot_name)
           if execute("clonevm", source_vm, '--name', name, 
             '--snapshot', snapshot_name, 
             '--mode',  'machine', '--options', 'link') !~ /successfully cloned/

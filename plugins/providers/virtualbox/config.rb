@@ -32,7 +32,7 @@ module VagrantPlugins
       # VM to clone this instance from.
       #
       # @return [String]
-      attr_reader :source_vm
+      attr_accessor :source_vm
 
       def initialize
         @auto_nat_dns_proxy = UNSET_VALUE
@@ -40,6 +40,7 @@ module VagrantPlugins
         @name             = UNSET_VALUE
         @network_adapters = {}
         @gui              = UNSET_VALUE
+        @source_vm = UNSET_VALUE
 
         # We require that network adapter 1 is a NAT device.
         network_adapter(1, :nat)
@@ -81,6 +82,8 @@ module VagrantPlugins
 
         # The default name is just nothing, and we default it
         @name = nil if @name == UNSET_VALUE
+        
+        @source_vm = nil if @source_vm == UNSET_VALUE
       end
 
       def to_s

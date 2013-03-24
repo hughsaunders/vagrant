@@ -7,8 +7,11 @@ module VagrantPlugins
         end
 
         def call(env)
-          env[:ui].info I18n.t("vagrant.actions.vm.clone.cloning",
-                               :source_vm => env[:machine].source_vm)
+            source_vm = env[:machine].provider_config.source_vm
+          env[:ui].info I18n.t(
+            "vagrant.actions.vm.clone.cloning",
+            :source_vm => source_vm 
+          )
 
           # Clone the virtual machine
           env[:machine].id = env[:machine].provider.driver.clone(source_vm)

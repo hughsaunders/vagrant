@@ -297,9 +297,10 @@ module VagrantPlugins
             if !env[:result]
               b2.use CheckAccessible
               b2.use HandleBoxUrl
-              if env[:machine].clone_source
+              source_vm = env[:machine].provider_config.source_vm
+              if source_vm
                 b2.use Clone
-              else
+              else 
                 b2.use Import
               end
               b2.use MatchMACAddress

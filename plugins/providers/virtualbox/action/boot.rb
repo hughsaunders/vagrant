@@ -10,11 +10,11 @@ module VagrantPlugins
           @env = env
 
           boot_mode = @env[:machine].provider_config.gui ? "gui" : "headless"
-          clone_source = @env[:machine].clone_source
+          source_vm = @env[:machine].source_vm
 
           # Start up the VM and wait for it to boot.
           env[:ui].info I18n.t("vagrant.actions.vm.boot.booting")
-          env[:machine].provider.driver.start(boot_mode, clone_source)
+          env[:machine].provider.driver.start(boot_mode, source_vm)
           raise Vagrant::Errors::VMFailedToBoot if !wait_for_boot
 
           @app.call(env)
